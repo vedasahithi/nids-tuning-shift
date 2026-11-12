@@ -1,0 +1,20 @@
+{
+  "arm": "default",
+  "seed": 3,
+  "budget": 0,
+  "distinct_trainings": 1,
+  "search_best_val": null,
+  "val_macro_f1": 0.6443591816731036,
+  "val_accuracy": 0.8185291853203684,
+  "test_macro_f1": 0.5321328300430229,
+  "test_accuracy": 0.7281858815527377,
+  "settings": {
+    "learning_rate": 0.1,
+    "max_iter": 200,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 20,
+    "l2_regularization": 0.0,
+    "class_weight_power": 0.5
+  },
+  "wall_min": 1.4727450766666152
+}

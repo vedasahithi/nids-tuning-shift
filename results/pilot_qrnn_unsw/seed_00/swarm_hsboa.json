@@ -1,0 +1,96 @@
+{
+  "arm": "swarm_hsboa",
+  "mode": "swarm",
+  "spec": {
+    "d": 10,
+    "units": 16,
+    "window": 2,
+    "pooling": "last",
+    "attention_units": 16,
+    "n_classes": 10
+  },
+  "n_params": 314,
+  "val": {
+    "n": 35069,
+    "accuracy": 0.5671960991188799,
+    "balanced_accuracy": 0.22872923306642226,
+    "macro_precision": 0.18647537162323116,
+    "macro_recall": 0.22872923306642226,
+    "macro_f1": 0.19789853464359655,
+    "macro_f1_present": 0.19789853464359655,
+    "macro_specificity": 0.9416600179473692,
+    "weighted_precision": 0.44466589055512273,
+    "weighted_recall": 0.5671960991188799,
+    "weighted_f1": 0.48998441353008376,
+    "micro_f1": 0.5671960991188799,
+    "mcc": 0.4324640595278834
+  },
+  "val_binary": {
+    "tp": 16963,
+    "tn": 8404,
+    "fp": 2796,
+    "fn": 6906,
+    "accuracy": 0.7233454047734467,
+    "tpr": 0.7106707444802882,
+    "tnr": 0.7503571428571428,
+    "fpr": 0.24964285714285714,
+    "precision": 0.8584948631003594,
+    "f1": 0.7776198771431192
+  },
+  "val_per_class": {
+    "Normal": {
+      "f1": 0.63402489626556,
+      "recall": 0.7503571428571428
+    },
+    "Generic": {
+      "f1": 0.863300280850576,
+      "recall": 0.941375
+    },
+    "Exploits": {
+      "f1": 0.4681079149544398,
+      "recall": 0.5884114388381494
+    },
+    "Fuzzers": {
+      "f1": 0.013552254365389626,
+      "recall": 0.0071487489689304375
+    },
+    "DoS": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Reconnaissance": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Analysis": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Backdoor": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Shellcode": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Worms": {
+      "f1": 0.0,
+      "recall": 0.0
+    }
+  },
+  "train_macro_f1": 0.19885185991535267,
+  "train_accuracy": 0.5696361355081556,
+  "wall_s": 1054.7142357000012,
+  "n_fitness_evals": 6000,
+  "n_gradient_steps": 0,
+  "extra": {
+    "optimizer": "HSBOA",
+    "fitness": "mse",
+    "fitness_rows": 9999,
+    "n_params": 314,
+    "iterations": 100,
+    "h_norm": 0.17259703106559643,
+    "move_norm": 7.563393986972032
+  }
+}

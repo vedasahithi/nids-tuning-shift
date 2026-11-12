@@ -1,0 +1,63 @@
+{
+  "seed": 6,
+  "model": "lgbm",
+  "wall_s": 132.4694756999961,
+  "rows": [
+    {
+      "part": "protocol",
+      "split": "official",
+      "settings": "default",
+      "macro_f1": 0.5330714423742459,
+      "accuracy": 0.7246149735218385,
+      "binary_accuracy": 0.8424913763785649,
+      "binary_fpr": 0.3368918918918919
+    },
+    {
+      "part": "binary",
+      "split": "official",
+      "settings": "default",
+      "accuracy": 0.9007676237671866,
+      "precision": 0.8605440856876746,
+      "tpr": 0.9783155386923145,
+      "f1": 0.9156584217698311,
+      "fpr": 0.19424324324324324
+    },
+    {
+      "part": "protocol",
+      "split": "official",
+      "settings": "e2_tuned",
+      "macro_f1": 0.5390119552048351,
+      "accuracy": 0.7495141621726668,
+      "binary_accuracy": 0.8621921002769276,
+      "binary_fpr": 0.2937567567567568
+    },
+    {
+      "part": "binary",
+      "split": "official",
+      "settings": "e2_tuned",
+      "accuracy": 0.8942938347179712,
+      "precision": 0.8491335760718303,
+      "tpr": 0.9825950763257743,
+      "f1": 0.9110022599678901,
+      "fpr": 0.2138918918918919
+    },
+    {
+      "part": "protocol",
+      "split": "random_70_30",
+      "settings": "default",
+      "macro_f1": 0.6169230435785369,
+      "accuracy": 0.8121005924814364,
+      "binary_accuracy": 0.9405190033893043,
+      "binary_fpr": 0.1149820788530466
+    },
+    {
+      "part": "protocol",
+      "split": "random_70_30",
+      "settings": "e2_tuned",
+      "macro_f1": 0.6230780880257578,
+      "accuracy": 0.8175208920855864,
+      "binary_accuracy": 0.9436625184341931,
+      "binary_fpr": 0.09519713261648746
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "arm": "adam_default",
+  "mode": "gradient",
+  "spec": {
+    "d": 10,
+    "units": 16,
+    "window": 2,
+    "pooling": "last",
+    "attention_units": 16,
+    "n_classes": 10
+  },
+  "n_params": 314,
+  "val": {
+    "n": 35069,
+    "accuracy": 0.7471270923037441,
+    "balanced_accuracy": 0.3791387602864066,
+    "macro_precision": 0.4471601496925882,
+    "macro_recall": 0.3791387602864066,
+    "macro_f1": 0.3615491863591217,
+    "macro_f1_present": 0.3615491863591217,
+    "macro_specificity": 0.9689507983319366,
+    "weighted_precision": 0.7231360443750886,
+    "weighted_recall": 0.7471270923037441,
+    "weighted_f1": 0.7137642339259644,
+    "micro_f1": 0.7471270923037441,
+    "mcc": 0.6819409394966711
+  },
+  "val_binary": {
+    "tp": 22678,
+    "tn": 9699,
+    "fp": 1501,
+    "fn": 1191,
+    "accuracy": 0.9232370469645556,
+    "tpr": 0.9501026435962965,
+    "tnr": 0.8659821428571428,
+    "fpr": 0.13401785714285713,
+    "precision": 0.9379213366971338,
+    "f1": 0.9439726939726939
+  },
+  "val_per_class": {
+    "Normal": {
+      "f1": 0.8781349026708917,
+      "recall": 0.8659821428571428
+    },
+    "Generic": {
+      "f1": 0.9492175419063524,
+      "recall": 0.959125
+    },
+    "Exploits": {
+      "f1": 0.6867804215622602,
+      "recall": 0.8707890402754903
+    },
+    "Fuzzers": {
+      "f1": 0.4789356984478935,
+      "recall": 0.47511685455045366
+    },
+    "DoS": {
+      "f1": 0.0024370430544272946,
+      "recall": 0.0012229922543823889
+    },
+    "Reconnaissance": {
+      "f1": 0.6002818224518554,
+      "recall": 0.6091515729265967
+    },
+    "Analysis": {
+      "f1": 0.019704433497536946,
+      "recall": 0.01
+    },
+    "Backdoor": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Shellcode": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Worms": {
+      "f1": 0.0,
+      "recall": 0.0
+    }
+  },
+  "train_macro_f1": 0.3606179714273501,
+  "train_accuracy": 0.7459721113265655,
+  "wall_s": 1142.3605003999983,
+  "n_fitness_evals": 0,
+  "n_gradient_steps": 109600,
+  "extra": {
+    "learning_rate": 0.001,
+    "batch_size": 256,
+    "dropout": 0.0,
+    "l2": 0.0,
+    "class_weight": "none",
+    "best_epoch": 200
+  }
+}

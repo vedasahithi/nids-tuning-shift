@@ -1,0 +1,9 @@
+a,b,win,tie,loss
+harmonic k=0.1,SBOA,0,26,0
+harmonic k=0.1,momentum k=0.1,0,26,0
+harmonic k=0.1,noise k=0.1,0,26,0
+harmonic k=0.1,shuffled k=0.1,0,26,0
+harmonic k=1,SBOA,4,22,0
+harmonic k=1,momentum k=1,1,25,0
+harmonic k=1,noise k=1,0,25,1
+harmonic k=1,shuffled k=1,0,26,0

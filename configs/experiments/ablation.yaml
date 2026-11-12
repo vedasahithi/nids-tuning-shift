@@ -1,0 +1,49 @@
+# Ablation: is any gain of HSBOA over SBOA due to harmonic structure?
+# Each variant adds a term to the SBOA escape move with the same kappa
+# schedule and warm-up; only the form of the term differs:
+#   harmonic  H from the causal harmonic forecast (proposed)
+#   noise     random direction, same per-bird norm as H
+#   momentum  kappa(t) * (x(t-1) - x(t-2))
+#   shuffled  H computed on a time-shuffled history
+# kappa0 = 0.1 is the configs/hsboa.yaml default; 1.0 makes the term large
+# enough to matter (at 0.1, |H| is ~0.1-1% of the SBOA move). The
+# extra harmonic-only rows give the kappa0 sensitivity curve.
+
+experiment: ablation
+seeds_from: configs/data.yaml
+dims: [10, 30]
+functions: [sphere, schwefel_222, rosenbrock, rastrigin, ackley, griewank, schwefel_226]
+transforms:
+  - {shift: true, rotate: false}
+  - {shift: true, rotate: true}
+transform_seed: 2026
+budget_per_dim: 10000
+pop_size: 30
+checkpoints: 50
+harmonic_config: configs/hsboa.yaml
+
+methods:
+  - {label: SBOA, optimizer: sboa}
+  - {label: "harmonic k=0.1", optimizer: hsboa, params: {variant: harmonic, harmonic: {kappa0: 0.1}}}
+  - {label: "noise k=0.1",    optimizer: hsboa, params: {variant: noise,    harmonic: {kappa0: 0.1}}}
+  - {label: "momentum k=0.1", optimizer: hsboa, params: {variant: momentum, harmonic: {kappa0: 0.1}}}
+  - {label: "shuffled k=0.1", optimizer: hsboa, params: {variant: shuffled, harmonic: {kappa0: 0.1}}}
+  - {label: "harmonic k=1",   optimizer: hsboa, params: {variant: harmonic, harmonic: {kappa0: 1.0}}}
+  - {label: "noise k=1",      optimizer: hsboa, params: {variant: noise,    harmonic: {kappa0: 1.0}}}
+  - {label: "momentum k=1",   optimizer: hsboa, params: {variant: momentum, harmonic: {kappa0: 1.0}}}
+  - {label: "shuffled k=1",   optimizer: hsboa, params: {variant: shuffled, harmonic: {kappa0: 1.0}}}
+  # kappa0 sensitivity (harmonic only)
+  - {label: "harmonic k=0.01", optimizer: hsboa, params: {variant: harmonic, harmonic: {kappa0: 0.01}}}
+  - {label: "harmonic k=0.3",  optimizer: hsboa, params: {variant: harmonic, harmonic: {kappa0: 0.3}}}
+  - {label: "harmonic k=3",    optimizer: hsboa, params: {variant: harmonic, harmonic: {kappa0: 3.0}}}
+
+# Paired tests (Wilcoxon + Holm over all rows below and all problems).
+comparisons:
+  - ["harmonic k=0.1", SBOA]
+  - ["harmonic k=0.1", "noise k=0.1"]
+  - ["harmonic k=0.1", "momentum k=0.1"]
+  - ["harmonic k=0.1", "shuffled k=0.1"]
+  - ["harmonic k=1", SBOA]
+  - ["harmonic k=1", "noise k=1"]
+  - ["harmonic k=1", "momentum k=1"]
+  - ["harmonic k=1", "shuffled k=1"]

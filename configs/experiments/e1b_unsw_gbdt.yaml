@@ -1,0 +1,43 @@
+# E1b: joint feature and hyper-parameter selection for gradient boosting on UNSW-NB15
+# Does HSBOA select features + settings for gradient boosting better than SBOA and random search,
+# and does any search beat a fixed default?
+# Hypotheses fixed before the run (test macro-F1 primary): H2 hsboa vs random, H3 hsboa vs sboa,
+# H4 hsboa vs default; H1 (hsboa vs the deep models) is tested in the E2 summary.
+
+experiment: e1b_unsw_gbdt
+dataset: unsw_nb15
+seeds_from: configs/data.yaml
+n_seeds: 10                       # the same 10 seeds as E1 and E2 (paired)
+tuners: [hsboa, sboa, random, default]    # the first is the reference of the paired tests
+model: hgb                        # sklearn HistGradientBoostingClassifier (hsboa.baselines.fit_hgb)
+harmonic_config: configs/hsboa.yaml       # unchanged from E1 (kappa0 = 0.1, L = 10)
+
+features:
+  selection: all                  # all 42 columns, ordered by mutual information on the training part
+  min_features: 3                 # mask repair: the top-MI columns are added up to this number
+
+hpo:
+  # Population 10, not 20 (fixed before any run): the harmonic term needs L = 10
+  # recorded positions per bird; at pop 20 the 400 evaluations give only ~9.5 iterations, so HSBOA
+  # would equal SBOA exactly (checked on a 49-D test function). At pop 10 the term is active.
+  pop_size: 10
+  # Matched compute on DISTINCT trainings (E1 rule): in 400 evaluations at pop 10 in 49-D, HSBOA and
+  # SBOA propose ~372-374 distinct points (6 seeds of a 49-D test function), so random search gets 373.
+  max_evals:
+    hsboa: 400
+    sboa: 400
+    random: 373
+    default: 0
+  train_samples: 30000            # stratified subsample used during the search (as E1/E2)
+  space:                          # decoded as in hsboa.baselines.decode (same ranges as E2 hgb)
+    log10_learning_rate: [-2.5, -0.5]
+    int_max_iter: [100, 400]
+    int_max_leaf_nodes: [15, 127]
+    int_min_samples_leaf: [5, 100]
+    log10_l2_regularization: [-6, 0]
+    class_weight_power: [0, 1]
+
+default:                          # the untuned arm: the best fixed pipeline of the headroom diagnostic
+  n_selected: 20                  # top-20 MI features
+  settings: {learning_rate: 0.1, max_iter: 200, max_leaf_nodes: 31, min_samples_leaf: 20,
+             l2_regularization: 0.0, class_weight_power: 0.5}

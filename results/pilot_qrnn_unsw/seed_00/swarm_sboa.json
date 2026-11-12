@@ -1,0 +1,94 @@
+{
+  "arm": "swarm_sboa",
+  "mode": "swarm",
+  "spec": {
+    "d": 10,
+    "units": 16,
+    "window": 2,
+    "pooling": "last",
+    "attention_units": 16,
+    "n_classes": 10
+  },
+  "n_params": 314,
+  "val": {
+    "n": 35069,
+    "accuracy": 0.5695058313610311,
+    "balanced_accuracy": 0.22895021094903,
+    "macro_precision": 0.17320180851613928,
+    "macro_recall": 0.22895021094903,
+    "macro_f1": 0.19673652576726897,
+    "macro_f1_present": 0.19673652576726897,
+    "macro_specificity": 0.9418285438739286,
+    "weighted_precision": 0.4305795192207931,
+    "weighted_recall": 0.5695058313610311,
+    "weighted_f1": 0.48935504766727445,
+    "micro_f1": 0.5695058313610311,
+    "mcc": 0.4355689706173935
+  },
+  "val_binary": {
+    "tp": 16890,
+    "tn": 8513,
+    "fp": 2687,
+    "fn": 6979,
+    "accuracy": 0.7243719524366249,
+    "tpr": 0.7076123842641082,
+    "tnr": 0.7600892857142857,
+    "fpr": 0.23991071428571428,
+    "precision": 0.8627471011901722,
+    "f1": 0.7775169175528243
+  },
+  "val_per_class": {
+    "Normal": {
+      "f1": 0.6378690244267946,
+      "recall": 0.7600892857142857
+    },
+    "Generic": {
+      "f1": 0.8609793726072795,
+      "recall": 0.94175
+    },
+    "Exploits": {
+      "f1": 0.4685168606386154,
+      "recall": 0.5876628237760144
+    },
+    "Fuzzers": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "DoS": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Reconnaissance": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Analysis": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Backdoor": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Shellcode": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Worms": {
+      "f1": 0.0,
+      "recall": 0.0
+    }
+  },
+  "train_macro_f1": 0.1975163465050457,
+  "train_accuracy": 0.5715823542831071,
+  "wall_s": 1074.7695683999991,
+  "n_fitness_evals": 6000,
+  "n_gradient_steps": 0,
+  "extra": {
+    "optimizer": "SBOA",
+    "fitness": "mse",
+    "fitness_rows": 9999,
+    "n_params": 314,
+    "iterations": 100
+  }
+}

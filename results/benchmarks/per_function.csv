@@ -1,0 +1,27 @@
+problem,function,dim,transform,seeds,HSBOA,SBOA,PSO,DE,GWO,POA,CSA,HSBOA_vs_SBOA,HSBOA_vs_PSO,HSBOA_vs_DE,HSBOA_vs_GWO,HSBOA_vs_POA,HSBOA_vs_CSA
+shifted_D10_ackley,ackley,10,shifted,30,0.0385 ± 0.21,0 ± 0,0 ± 0,0 ± 0,1.28 ± 1.8,6.73 ± 3,1.18 ± 1.1,=,=,=,+,+,+
+shifted_D10_griewank,griewank,10,shifted,30,0.0281 ± 0.017,0.0231 ± 0.019,0.0681 ± 0.034,0.0291 ± 0.023,1.02 ± 0.5,3.24 ± 5,0.196 ± 0.095,=,+,=,+,+,+
+shifted_D10_rastrigin,rastrigin,10,shifted,30,3.35 ± 2.1,3.75 ± 2.4,9.39 ± 5.9,2.34 ± 1.2,8.71 ± 4.7,16 ± 4.4,13.5 ± 4,=,+,=,+,+,+
+shifted_D10_rosenbrock,rosenbrock,10,shifted,30,2.15 ± 2,2.27 ± 1.8,1.09 ± 1.8,72.6 ± 3.1e+02,3.14e+03 ± 8.2e+03,1.26e+04 ± 3.7e+04,18.7 ± 48,=,=,+,+,+,=
+shifted_D10_schwefel_222,schwefel_222,10,shifted,30,0 ± 0,0 ± 0,0 ± 0,0 ± 0,0.26 ± 0.28,3.13 ± 3.5,8.2e-05 ± 0.00018,=,=,=,+,+,+
+shifted_D10_schwefel_226,schwefel_226,10,shifted,30,458 ± 1.9e+02,444 ± 1.5e+02,1.14e+03 ± 2.9e+02,468 ± 2.5e+02,1.21e+03 ± 2.8e+02,1.02e+03 ± 3.5e+02,1.25e+03 ± 3.6e+02,=,+,=,+,+,+
+shifted_D10_sphere,sphere,10,shifted,30,0 ± 0,0 ± 0,0 ± 0,0 ± 0,15.7 ± 16,67.4 ± 2.5e+02,0 ± 0,=,=,=,+,+,=
+shifted_D30_ackley,ackley,30,shifted,30,2.44 ± 2.3,2.67 ± 2.3,2.69 ± 1.9,1.48 ± 1.2,6.27 ± 1.5,17.3 ± 1.7,5.73 ± 2.4,=,=,=,+,+,+
+shifted_D30_griewank,griewank,30,shifted,30,0.0177 ± 0.02,0.0151 ± 0.019,4.09 ± 9,0.0716 ± 0.078,10.2 ± 8.1,158 ± 49,0.0182 ± 0.023,=,=,+,+,+,=
+shifted_D30_rastrigin,rastrigin,30,shifted,30,66.7 ± 19,68.2 ± 20,101 ± 32,25.4 ± 6,73.1 ± 18,180 ± 21,132 ± 20,=,+,-,=,+,+
+shifted_D30_rosenbrock,rosenbrock,30,shifted,30,28.8 ± 25,24.5 ± 24,1.08e+05 ± 3.2e+05,7.51e+04 ± 2.9e+05,5.18e+05 ± 1.7e+06,3.2e+07 ± 1.6e+07,28.6 ± 9.9,=,=,+,+,+,=
+shifted_D30_schwefel_222,schwefel_222,30,shifted,30,0 ± 0,0 ± 0,0 ± 0,7.01e-05 ± 0.00037,11.2 ± 5.9,50.9 ± 9.3,9.7 ± 5.8,=,=,=,+,+,+
+shifted_D30_schwefel_226,schwefel_226,30,shifted,30,2.85e+03 ± 5.2e+02,2.89e+03 ± 6.5e+02,4.92e+03 ± 7.9e+02,2.8e+03 ± 7.2e+02,5.99e+03 ± 5.4e+02,5.04e+03 ± 8.4e+02,5.07e+03 ± 1.2e+03,=,+,=,+,+,+
+shifted_D30_sphere,sphere,30,shifted,30,0 ± 0,0 ± 0,96 ± 2.6e+02,10.3 ± 31,991 ± 9.9e+02,2.11e+04 ± 7.4e+03,0 ± 0,=,=,+,+,+,=
+shifted_rotated_D10_ackley,ackley,10,shifted_rotated,30,0.0549 ± 0.3,0.209 ± 0.48,1.08 ± 3.6,0 ± 0,1.92 ± 2.2,6.75 ± 4.3,1.67 ± 1.1,=,=,=,+,+,+
+shifted_rotated_D10_griewank,griewank,10,shifted_rotated,30,0.0315 ± 0.02,0.0325 ± 0.025,0.293 ± 0.91,0.0383 ± 0.026,0.753 ± 0.48,5 ± 7,0.234 ± 0.11,=,+,=,+,+,+
+shifted_rotated_D10_rastrigin,rastrigin,10,shifted_rotated,30,10.2 ± 4.6,9.64 ± 4.2,21.3 ± 8,11.6 ± 6.6,17.9 ± 9.6,28.9 ± 8.7,20.2 ± 8.1,=,+,=,+,+,+
+shifted_rotated_D10_rosenbrock,rosenbrock,10,shifted_rotated,30,35.5 ± 57,53.6 ± 1.1e+02,354 ± 1.3e+03,47 ± 61,800 ± 1.2e+03,5.15e+04 ± 1.7e+05,44.5 ± 1.2e+02,=,=,=,+,+,=
+shifted_rotated_D10_schwefel_222,schwefel_222,10,shifted_rotated,30,0 ± 0,1.76e-08 ± 9.6e-08,0 ± 0,0 ± 0,2 ± 2.5,3.39 ± 2.6,4.23e-06 ± 1.5e-05,=,=,=,+,+,+
+shifted_rotated_D10_sphere,sphere,10,shifted_rotated,30,0 ± 0,0 ± 0,0 ± 0,0 ± 0,29.9 ± 80,77.6 ± 1.2e+02,0 ± 0,=,=,=,+,+,=
+shifted_rotated_D30_ackley,ackley,30,shifted_rotated,30,2.12 ± 0.96,2.55 ± 1,3.07 ± 1.5,1.39 ± 0.72,7.53 ± 2.7,18.1 ± 0.8,7.07 ± 2.8,=,=,=,+,+,+
+shifted_rotated_D30_griewank,griewank,30,shifted_rotated,30,0.0118 ± 0.017,0.0126 ± 0.016,3.91 ± 8.3,0.776 ± 1.8,14.8 ± 13,162 ± 64,0.0091 ± 0.013,=,=,=,+,+,=
+shifted_rotated_D30_rastrigin,rastrigin,30,shifted_rotated,30,55.3 ± 15,65.1 ± 18,109 ± 25,37.2 ± 16,94.3 ± 48,139 ± 18,113 ± 21,=,+,-,+,+,+
+shifted_rotated_D30_rosenbrock,rosenbrock,30,shifted_rotated,30,27.6 ± 10,32.5 ± 32,16.1 ± 2.6,832 ± 2.4e+03,1.95e+05 ± 3.1e+05,4.03e+06 ± 3.3e+06,29 ± 9.2,=,-,=,+,+,=
+shifted_rotated_D30_schwefel_222,schwefel_222,30,shifted_rotated,30,14 ± 6.5,11.7 ± 5,5.84 ± 4.7,6.13 ± 5.4,37.5 ± 10,57.2 ± 7.9,9.31 ± 5.2,=,-,-,+,+,=
+shifted_rotated_D30_sphere,sphere,30,shifted_rotated,30,0 ± 0,0 ± 0,294 ± 1e+03,3.64 ± 10,946 ± 1.2e+03,1.49e+04 ± 5.2e+03,0 ± 0,=,=,+,+,+,=

@@ -1,0 +1,31 @@
+# E1: tuner comparison on UNSW-NB15, 10 classes, official 175,341 / 82,332 partitions.
+# Does HSBOA tune the Adam-trained QRNN better than random search?
+# HSBOA = SBOA at this budget (the harmonic warm-up needs > 168
+# evaluations), so SBOA is not run separately.
+
+experiment: e1_unsw_tuners
+dataset: unsw_nb15
+seeds_from: configs/data.yaml
+n_seeds: 10                       # the first 10 pre-declared seeds (>= 10 needed for Holm-corrected claims)
+tuners: [hsboa, random]
+model_config: configs/model.yaml  # search space and fixed model settings (pooling, attention units)
+harmonic_config: configs/hsboa.yaml
+
+hpo:
+  pop_size: 8
+  # Matched compute : equal numbers of DISTINCT
+  # trainings, not equal evaluations. SBOA's t/T schedule collapses at small T
+  # (e.g. the attack stage multiplies by (1 - t/T)^(2t/T) = 0 in the last
+  # iteration), so HSBOA re-proposes settings it has already tried; repeats are
+  # replayed from the cache at no cost. At pop 8, 48 evaluations give HSBOA
+  # ~38-39 distinct trainings, so random search gets 39 (it never repeats).
+  max_evals:                      # evaluations per run (initial population included)
+    hsboa: 48
+    random: 39
+  train_samples: 30000            # stratified subsample used during the search
+  epochs: 100                     # fixed trial budget (no early stopping)
+  patience: null
+
+final:                            # retrain the best settings on the full training part
+  epochs: 200                     # fixed final budget
+  patience: null

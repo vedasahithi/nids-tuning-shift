@@ -1,0 +1,48 @@
+# QRNN classifier and the two training modes compared in the pilot. Anything
+# tuned is tuned on the validation split only, never on the test partition.
+
+model:
+  units: 16             # u, QRNN hidden size (small enough for weight-space search)
+  window: 2             # k, causal convolution width
+  pooling: last         # last | attention
+  attention_units: 16
+  # d = features.n_features in configs/data.yaml; 10 output classes (UNSW-NB15), softmax
+
+# Option (a): the optimiser searches the flat weight vector directly.
+swarm:
+  fitness: mse                  # mean squared error between one-hot targets and softmax outputs
+  fitness_samples: 10000        # fixed stratified subsample of the training part (same for every candidate)
+  bound: 2.0                    # weights searched in [-bound, bound]
+  pop_size: 30
+  max_evals: 6000               # fitness evaluations per run (initial population included)
+
+# Option (b): Adam trains the weights; the optimiser tunes the hyper-parameters.
+gradient:
+  optimizer: adam
+  loss: categorical_crossentropy
+  learning_rate: 0.001          # defaults when not tuned
+  batch_size: 256
+  # The pilot stopped at the epoch cap in every run (still improving), so the
+  # cap is generous and early stopping decides when training ends.
+  epochs: 200
+  early_stopping_patience: 10   # on validation loss; best weights restored
+  dropout: 0.0
+  l2: 0.0
+  class_weight: none            # none | balanced | power alpha in [0, 1]: w_c = (n / (K n_c))^alpha
+
+hpo:
+  fitness: 1 - macro_f1         # on the validation split, after training with the candidate settings
+  pop_size: 8
+  max_evals: 48
+  train_samples: 30000          # stratified subsample used during the search (full training part for the final model)
+  epochs: 100                   # cap; early stopping ends each trial
+  early_stopping_patience: 5
+  # Search space: every dimension is a coordinate in [0, 1] decoded as below.
+  space:
+    log10_learning_rate: [-4.0, -1.5]
+    log2_units: [3, 6]              # 8 .. 64, rounded
+    window: [1, 4]                  # rounded
+    dropout: [0.0, 0.5]
+    log10_l2: [-7.0, -3.0]
+    log2_batch_size: [6, 9]         # 64 .. 512, rounded
+    class_weight_power: [0.0, 1.0]  # 0 = unweighted loss, 1 = fully balanced (rare classes)

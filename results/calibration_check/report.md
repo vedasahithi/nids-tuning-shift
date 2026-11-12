@@ -1,0 +1,7 @@
+# Calibration check of the domain classifier
+
+          ess_ratio_mean  ess_ratio_std  max_weight_mean  max_weight_std  macro_f1_ordinary_mean  macro_f1_ordinary_std  macro_f1_weighted_mean  macro_f1_weighted_std  ece_oof_mean  ece_oof_std
+version                                                                                                                                                                                          
+raw               0.4461         0.0058           6.2643          0.1973                  0.6409                 0.0079                  0.6652                 0.0089        0.0408       0.0007
+isotonic          0.2652         0.0169          10.9601          1.2063                  0.6409                 0.0079                  0.6605                 0.0105        0.0010       0.0006
+platt             0.2529         0.0077          11.2242          0.4843                  0.6409                 0.0079                  0.6595                 0.0103        0.0102       0.0009

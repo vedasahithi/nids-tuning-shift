@@ -1,0 +1,95 @@
+{
+  "arm": "adam_balanced",
+  "mode": "gradient",
+  "spec": {
+    "d": 10,
+    "units": 16,
+    "window": 2,
+    "pooling": "last",
+    "attention_units": 16,
+    "n_classes": 10
+  },
+  "n_params": 314,
+  "val": {
+    "n": 35069,
+    "accuracy": 0.601043656790898,
+    "balanced_accuracy": 0.4794756731740314,
+    "macro_precision": 0.39255217159659905,
+    "macro_recall": 0.4794756731740314,
+    "macro_f1": 0.36085526352949965,
+    "macro_f1_present": 0.36085526352949965,
+    "macro_specificity": 0.9575433292175155,
+    "weighted_precision": 0.7610801105822262,
+    "weighted_recall": 0.601043656790898,
+    "weighted_f1": 0.6500439308558749,
+    "micro_f1": 0.601043656790898,
+    "mcc": 0.5340814498086446
+  },
+  "val_binary": {
+    "tp": 23790,
+    "tn": 7889,
+    "fp": 3311,
+    "fn": 79,
+    "accuracy": 0.9033334283840428,
+    "tpr": 0.9966902677112572,
+    "tnr": 0.704375,
+    "fpr": 0.295625,
+    "precision": 0.8778273864433047,
+    "f1": 0.933490288404944
+  },
+  "val_per_class": {
+    "Normal": {
+      "f1": 0.8231427378964942,
+      "recall": 0.704375
+    },
+    "Generic": {
+      "f1": 0.9348455895950194,
+      "recall": 0.947875
+    },
+    "Exploits": {
+      "f1": 0.436633344082554,
+      "recall": 0.3040874382392574
+    },
+    "Fuzzers": {
+      "f1": 0.472317880794702,
+      "recall": 0.49023920813857574
+    },
+    "DoS": {
+      "f1": 0.2608695652173913,
+      "recall": 0.24459845087647777
+    },
+    "Reconnaissance": {
+      "f1": 0.34516471838469714,
+      "recall": 0.38703527168732127
+    },
+    "Analysis": {
+      "f1": 0.11204268292682927,
+      "recall": 0.3675
+    },
+    "Backdoor": {
+      "f1": 0.06565656565656566,
+      "recall": 0.22349570200573066
+    },
+    "Shellcode": {
+      "f1": 0.14143426294820716,
+      "recall": 0.6255506607929515
+    },
+    "Worms": {
+      "f1": 0.01644528779253637,
+      "recall": 0.5
+    }
+  },
+  "train_macro_f1": 0.3609403164092244,
+  "train_accuracy": 0.6015883426485685,
+  "wall_s": 1210.5622814999988,
+  "n_fitness_evals": 0,
+  "n_gradient_steps": 109600,
+  "extra": {
+    "learning_rate": 0.001,
+    "batch_size": 256,
+    "dropout": 0.0,
+    "l2": 0.0,
+    "class_weight": "balanced",
+    "best_epoch": 200
+  }
+}

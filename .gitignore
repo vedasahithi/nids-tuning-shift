@@ -1,0 +1,22 @@
+# Environment / IDE
+.venv/
+venv/
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+
+# UNSW-NB15 (download separately, see README)
+data/raw/unsw_nb15/*.csv
+
+# Regenerated outputs
+paper/tables/
+paper/figures/
+results/*_smoke/
+results/*/raw/
+results/*/proba/
+results/*/weights/
+results/logs/
+**/trials.jsonl
+**/*_trials.jsonl
+**/.claim

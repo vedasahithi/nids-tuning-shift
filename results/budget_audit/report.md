@@ -1,0 +1,23 @@
+# Search-budget accounting from stored trial logs
+
+            proposals_mean  proposals_min  proposals_max  repeated_settings_mean  repeated_settings_min  repeated_settings_max  distinct_settings_mean  distinct_settings_min  distinct_settings_max  reused_from_earlier_attempt_mean  reused_from_earlier_attempt_min  reused_from_earlier_attempt_max
+arm                                                                                                                                                                                                                                                                                                     
+hgb_hsboa            400.0            400            400                    25.5                     22                     29                   374.5                    371                    378                              54.6                               22                              172
+hgb_random           373.0            373            373                     0.0                      0                      0                   373.0                    373                    373                              42.8                                0                              226
+hgb_sboa             400.0            400            400                    27.8                     24                     31                   372.2                    369                    376                              81.6                               25                              303
+iw_hsboa             400.0            400            400                    25.8                     22                     29                   374.2                    371                    378                              25.8                               22                               29
+iw_pso               400.0            400            400                     0.0                      0                      0                   400.0                    400                    400                               0.0                                0                                0
+iw_random            373.0            373            373                     0.0                      0                      0                   373.0                    373                    373                               0.0                                0                                0
+iw_sboa              400.0            400            400                    27.9                     23                     32                   372.1                    368                    377                              27.9                               23                               32
+
+Best-so-far search-validation macro-F1 after n distinct trainings (mean, sd over seeds):
+
+            best_after_50_mean  best_after_50_std  best_after_100_mean  best_after_100_std  best_after_200_mean  best_after_200_std  best_after_300_mean  best_after_300_std  best_after_373_mean  best_after_373_std
+arm                                                                                                                                                                                                                  
+hgb_hsboa               0.5918             0.0170               0.6057              0.0120               0.6167              0.0145               0.6228              0.0141               0.6234              0.0146
+hgb_random              0.5960             0.0123               0.5997              0.0089               0.6011              0.0092               0.6046              0.0106               0.6061              0.0090
+hgb_sboa                0.5918             0.0170               0.6057              0.0120               0.6175              0.0140               0.6217              0.0136               0.6229              0.0138
+iw_hsboa                0.6333             0.0268               0.6439              0.0195               0.6574              0.0148               0.6633              0.0144               0.6646              0.0146
+iw_pso                  0.6423             0.0181               0.6505              0.0182               0.6574              0.0184               0.6589              0.0185               0.6605              0.0189
+iw_random               0.6262             0.0164               0.6320              0.0146               0.6378              0.0117               0.6408              0.0135               0.6409              0.0135
+iw_sboa                 0.6333             0.0268               0.6439              0.0195               0.6569              0.0152               0.6656              0.0148               0.6661              0.0152

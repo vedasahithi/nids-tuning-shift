@@ -1,0 +1,28 @@
+{
+  "arm": "sboa",
+  "seed": 3,
+  "budget": 60,
+  "distinct_trainings": 49,
+  "search_best_val": 0.649042512520311,
+  "first_candidate_val": 0.6449045826108366,
+  "best_after": {
+    "1": 0.6449045826108366,
+    "10": 0.6449045826108366,
+    "20": 0.6449045826108366,
+    "40": 0.6474629205405558,
+    "60": 0.649042512520311
+  },
+  "val_macro_f1": 0.649042512520311,
+  "val_accuracy": 0.8173885768057259,
+  "test_macro_f1": 0.5314418583559972,
+  "test_accuracy": 0.7298255842199873,
+  "settings": {
+    "learning_rate": 0.09990218833176064,
+    "max_iter": 200,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 20,
+    "l2_regularization": 1.0057238874645731e-06,
+    "class_weight_power": 0.5003807385779733
+  },
+  "wall_min": 69.43235599833339
+}

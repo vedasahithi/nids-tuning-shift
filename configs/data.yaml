@@ -1,0 +1,25 @@
+# Data protocol. Dataset: UNSW-NB15 (official partitions in data/raw/unsw_nb15/,
+# loaded by hsboa.data).
+
+split:
+  # Stratified validation split carved from the official training partition
+  # (model selection only). The official test partition is never used for selection.
+  val_size: 0.2
+  # Training-size sweep: nested stratified subsamples of the training part.
+  train_fractions: [0.6, 0.7, 0.8, 0.9, 1.0]
+
+# Pre-declared seeds. Do not change after experiments start.
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+
+preprocess:
+  categorical_encoding: ordinal   # ordinal (42 inputs, one per raw feature) | onehot
+  impute_strategy: median         # kept for the paper's pipeline
+
+features:
+  n_features: 10                  # d (pre-declared)
+  # mutual_info: in a design-stage check (seeds 0-1, RF probe, d = 10) SVM-RFE picked rare
+  # low-MI flags and was unstable across seeds, while the MI ranking was stable.
+  selection: mutual_info          # mutual_info | svm_rfe | all
+  order: mutual_info              # mutual_info | original | reverse | random
+  max_samples: 20000              # stratified subsample used only to speed up selection

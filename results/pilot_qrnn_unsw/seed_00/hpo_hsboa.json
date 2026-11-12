@@ -1,0 +1,112 @@
+{
+  "arm": "hpo_hsboa",
+  "mode": "hpo",
+  "spec": {
+    "d": 10,
+    "units": 29,
+    "window": 3,
+    "pooling": "last",
+    "attention_units": 16,
+    "n_classes": 10
+  },
+  "n_params": 648,
+  "val": {
+    "n": 35069,
+    "accuracy": 0.7420228692007186,
+    "balanced_accuracy": 0.4696434536650921,
+    "macro_precision": 0.47243007654157865,
+    "macro_recall": 0.4696434536650921,
+    "macro_f1": 0.4521749538027053,
+    "macro_f1_present": 0.4521749538027053,
+    "macro_specificity": 0.9710670683262173,
+    "weighted_precision": 0.7874818911792796,
+    "weighted_recall": 0.7420228692007186,
+    "weighted_f1": 0.7524102843996111,
+    "micro_f1": 0.7420228692007186,
+    "mcc": 0.6865179307524979
+  },
+  "val_binary": {
+    "tp": 23630,
+    "tn": 8855,
+    "fp": 2345,
+    "fn": 239,
+    "accuracy": 0.9263166899540906,
+    "tpr": 0.9899870124429176,
+    "tnr": 0.790625,
+    "fpr": 0.209375,
+    "precision": 0.909720885466795,
+    "f1": 0.9481582537517054
+  },
+  "val_per_class": {
+    "Normal": {
+      "f1": 0.8726717256331921,
+      "recall": 0.790625
+    },
+    "Generic": {
+      "f1": 0.9778428626002801,
+      "recall": 0.959875
+    },
+    "Exploits": {
+      "f1": 0.6231969633066217,
+      "recall": 0.5530768079053751
+    },
+    "Fuzzers": {
+      "f1": 0.5808188446438587,
+      "recall": 0.7118504261754193
+    },
+    "DoS": {
+      "f1": 0.4386575685837627,
+      "recall": 0.6420709335507542
+    },
+    "Reconnaissance": {
+      "f1": 0.6276985743380856,
+      "recall": 0.734509056244042
+    },
+    "Analysis": {
+      "f1": 0.17864077669902914,
+      "recall": 0.115
+    },
+    "Backdoor": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Shellcode": {
+      "f1": 0.22222222222222224,
+      "recall": 0.1894273127753304
+    },
+    "Worms": {
+      "f1": 0.0,
+      "recall": 0.0
+    }
+  },
+  "train_macro_f1": 0.4454119443331271,
+  "train_accuracy": 0.7393563932930307,
+  "wall_s": 11215.5583242,
+  "n_fitness_evals": 48,
+  "n_gradient_steps": 430657,
+  "extra": {
+    "learning_rate": 0.006385221205704995,
+    "batch_size": 285,
+    "dropout": 0.20841076599611064,
+    "l2": 3.5303186700160404e-07,
+    "class_weight": 0.5724798259647477,
+    "best_epoch": 90,
+    "distinct_trials": 39,
+    "optimizer": "HSBOA",
+    "best_settings": {
+      "epochs": 100,
+      "patience": 5,
+      "class_weight": 0.5724798259647477,
+      "pooling": "last",
+      "attention_units": 16,
+      "learning_rate": 0.006385221205704995,
+      "units": 29,
+      "window": 3,
+      "dropout": 0.20841076599611064,
+      "l2": 3.5303186700160404e-07,
+      "batch_size": 285
+    },
+    "search_best_fitness": 0.5900497449215286,
+    "search_rows": 29999
+  }
+}

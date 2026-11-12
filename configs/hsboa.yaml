@@ -1,0 +1,14 @@
+# HSBOA harmonic settings. These map one-to-one onto
+# hsboa.harmonic.HarmonicConfig. Values are starting points; tune them
+# on validation only, and report the final values in Algorithm 1.
+
+harmonic:
+  L: 10                 # history length: positions after greedy selection, one per iteration
+  F: 2                  # number of harmonics; must satisfy 2F+1 < L (smoothing)
+  period: null          # base period P for fixed frequencies; null -> 2L (P = L wraps around)
+  frequencies: fixed    # fixed (linear filter) | periodogram (data-driven, ref. [5])
+  kappa0: 0.1           # adjustment scale at t = 0
+  schedule: linear      # linear | constant | cosine decay of kappa over iterations
+  mode: forecast        # forecast: H = kappa*(g_hat - x) | oscillatory: H = kappa*(g_hat - c0)
+  # Warm-up: H = 0 (plain SBOA) until a bird has L recorded positions.
+  # Bounds: X_SBOA + H is clipped to [lb, ub] before greedy selection (optimiser, step 6).

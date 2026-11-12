@@ -1,0 +1,7 @@
+quantity,value,ci_lo,ci_hi
+test rows with a training twin (coverage),0.10373852208132925,,
+test groups with a training twin / test groups,0.024135246357468578,,
+cross-partition pairwise disagreement (test vs train twin),0.5563588488877592,0.5130408841569447,0.5997138178605547
+within-train pairwise disagreement (all matched classes),0.25155380203364797,0.23979908183558105,0.26342885902888286
+within-train disagreement standardised to matched test class mix,0.34215658957898465,0.31736877476386915,0.3657001558322801
+excess disagreement: cross minus standardised within-train,0.21420225930877457,0.1908848423652248,0.2375493702936308

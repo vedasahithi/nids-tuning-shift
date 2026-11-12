@@ -1,0 +1,72 @@
+# E6 (step 3): shift-aware joint feature + hyper-parameter selection for LightGBM on UNSW-NB15
+# (designed after the shift diagnostic and the importance-weighting feasibility gate).
+# Unsupervised domain adaptation: the test partition's features are used without labels (importance weights from a domain
+# classifier, hsboa.shift_tune); test labels are read once, by `run_shift.py --final-test`, after all
+# runs have finished; the run phase refuses to start once the final test has been done.
+#
+# Hypotheses fixed before the run (test macro-F1, Wilcoxon signed-rank paired by seed, one-sided in the
+# stated direction, Holm over H5-H10):
+#   H5  iw_hsboa      > std_hsboa      shift-aware fitness beats the standard fitness (primary)
+#   H6  iw_hsboa      > iw_random      the optimizer matters under the shift-aware fitness
+#   H7  iw_hsboa      > iw_sboa        the harmonic term matters
+#   H8  iw_hsboa      > iw_pso         HSBOA vs a standard swarm optimizer
+#   H9  iwtrain_hsboa vs iw_hsboa      also weighting the training rows (two-sided)
+#   H10 iw_hsboa      > default        any search beats a fixed default
+# Also reported, not tested: the stored E2 LightGBM (random search, standard fitness, top-20 MI).
+
+experiment: e6_unsw_shift
+dataset: unsw_nb15
+seeds_from: configs/data.yaml
+n_seeds: 10                       # the same 10 seeds as E1b and E2 (paired)
+model: lgbm                       # LightGBM; unit tests use hgb
+harmonic_config: configs/hsboa.yaml       # unchanged (kappa0 = 0.1, L = 10)
+
+arms:                             # name: tuner, fitness (iw | std), training weights (iw | none)
+  iw_hsboa:      {tuner: hsboa,  fitness: iw,  train: none}
+  std_hsboa:     {tuner: hsboa,  fitness: std, train: none}
+  iw_sboa:       {tuner: sboa,   fitness: iw,  train: none}
+  iw_pso:        {tuner: pso,    fitness: iw,  train: none}
+  iw_random:     {tuner: random, fitness: iw,  train: none}
+  iwtrain_hsboa: {tuner: hsboa,  fitness: iw,  train: iw}
+  default:       {tuner: none,   fitness: std, train: none}
+hypotheses:                       # [name, a, b, alternative]
+  - [H5, iw_hsboa, std_hsboa, greater]
+  - [H6, iw_hsboa, iw_random, greater]
+  - [H7, iw_hsboa, iw_sboa, greater]
+  - [H8, iw_hsboa, iw_pso, greater]
+  - [H9, iwtrain_hsboa, iw_hsboa, two-sided]
+  - [H10, iw_hsboa, default, greater]
+
+weights:                          # hsboa.shift_tune.importance_weights
+  domain_max_iter: 200            # HGB domain classifier (as the shift diagnostic and the gate)
+  cross_fit_folds: 5              # training-row weights are cross-fitted
+  clip_quantile: 0.99             # fixed in hsboa.shift_tune.CLIP (as the gate)
+
+features:
+  selection: all                  # all 42 columns, ordered by mutual information on the training part (as E1b)
+  min_features: 3
+
+hpo:
+  pop_size: 10                    # as E1b (the harmonic term needs L = 10 positions per bird)
+  max_evals:                      # as E1b; random gets E1b's measured distinct count of the swarm methods
+    hsboa: 400
+    sboa: 400
+    pso: 400
+    random: 373
+  train_samples: 30000            # stratified search subsample (as E1b, E2)
+  space:                          # E2's LightGBM ranges
+    log10_learning_rate: [-2.5, -0.5]
+    int_n_estimators: [100, 400]
+    int_num_leaves: [15, 127]
+    int_min_child_samples: [5, 100]
+    log10_reg_lambda: [-6, 1]
+    subsample: [0.5, 1.0]
+    colsample_bytree: [0.3, 1.0]
+    class_weight_power: [0, 1]
+
+default:                          # untuned arm: LightGBM defaults, top-20 MI features, class weight power 0.5
+  n_selected: 20
+  settings: {learning_rate: 0.1, n_estimators: 100, num_leaves: 31, min_child_samples: 20, reg_lambda: 0.0,
+             subsample: 1.0, colsample_bytree: 1.0, class_weight_power: 0.5}
+
+e2_reference: results/e2_unsw_baselines/lgbm

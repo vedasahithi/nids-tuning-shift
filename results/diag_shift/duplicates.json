@@ -1,0 +1,10 @@
+{
+  "rows": 175341,
+  "unique_rows": 101040,
+  "dup_row_share": 0.4793459601576357,
+  "conflict_row_share": 0.17410645542115077,
+  "other_rows": 82332,
+  "other_seen_share": 0.10373852208132925,
+  "other_seen_conflicting_share": 0.03230821551766021,
+  "other_dup_row_share": 0.4215128989943157
+}

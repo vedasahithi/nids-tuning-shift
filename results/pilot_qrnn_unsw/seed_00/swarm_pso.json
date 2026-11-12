@@ -1,0 +1,94 @@
+{
+  "arm": "swarm_pso",
+  "mode": "swarm",
+  "spec": {
+    "d": 10,
+    "units": 16,
+    "window": 2,
+    "pooling": "last",
+    "attention_units": 16,
+    "n_classes": 10
+  },
+  "n_params": 314,
+  "val": {
+    "n": 35069,
+    "accuracy": 0.5801990361858052,
+    "balanced_accuracy": 0.23424248128334385,
+    "macro_precision": 0.21216689131168348,
+    "macro_recall": 0.23424248128334385,
+    "macro_f1": 0.20428430630634553,
+    "macro_f1_present": 0.20428430630634553,
+    "macro_specificity": 0.9438260349959655,
+    "weighted_precision": 0.4723699796887508,
+    "weighted_recall": 0.5801990361858052,
+    "weighted_f1": 0.5039019031255053,
+    "micro_f1": 0.5801990361858052,
+    "mcc": 0.450769189570543
+  },
+  "val_binary": {
+    "tp": 17725,
+    "tn": 8713,
+    "fp": 2487,
+    "fn": 6144,
+    "accuracy": 0.7538851977530012,
+    "tpr": 0.742594997695756,
+    "tnr": 0.7779464285714286,
+    "fpr": 0.22205357142857143,
+    "precision": 0.8769542845834158,
+    "f1": 0.8042013565935439
+  },
+  "val_per_class": {
+    "Normal": {
+      "f1": 0.6687646313850405,
+      "recall": 0.7779464285714286
+    },
+    "Generic": {
+      "f1": 0.8637907608695652,
+      "recall": 0.953625
+    },
+    "Exploits": {
+      "f1": 0.46793037672866,
+      "recall": 0.5876628237760144
+    },
+    "Fuzzers": {
+      "f1": 0.03516592372461615,
+      "recall": 0.019521583722848502
+    },
+    "DoS": {
+      "f1": 0.007191370355573311,
+      "recall": 0.0036689767631471666
+    },
+    "Reconnaissance": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Analysis": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Backdoor": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Shellcode": {
+      "f1": 0.0,
+      "recall": 0.0
+    },
+    "Worms": {
+      "f1": 0.0,
+      "recall": 0.0
+    }
+  },
+  "train_macro_f1": 0.2062162867768264,
+  "train_accuracy": 0.583387989049846,
+  "wall_s": 1077.7609893000008,
+  "n_fitness_evals": 6000,
+  "n_gradient_steps": 0,
+  "extra": {
+    "optimizer": "PSO",
+    "fitness": "mse",
+    "fitness_rows": 9999,
+    "n_params": 314,
+    "iterations": 199
+  }
+}

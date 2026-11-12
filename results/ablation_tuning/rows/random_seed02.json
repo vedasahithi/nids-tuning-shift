@@ -1,0 +1,28 @@
+{
+  "arm": "random",
+  "seed": 2,
+  "budget": 60,
+  "distinct_trainings": 60,
+  "search_best_val": 0.6525302708309992,
+  "first_candidate_val": 0.651768420098358,
+  "best_after": {
+    "1": 0.651768420098358,
+    "10": 0.6525302708309992,
+    "20": 0.6525302708309992,
+    "40": 0.6525302708309992,
+    "60": 0.6525302708309992
+  },
+  "val_macro_f1": 0.6525302708309992,
+  "val_accuracy": 0.8142519033904588,
+  "test_macro_f1": 0.5255302843185604,
+  "test_accuracy": 0.7352183841033862,
+  "settings": {
+    "learning_rate": 0.008013364450687252,
+    "max_iter": 365,
+    "max_leaf_nodes": 91,
+    "min_samples_leaf": 86,
+    "l2_regularization": 0.0073555917196383,
+    "class_weight_power": 0.40654239767553646
+  },
+  "wall_min": 91.48356901000007
+}

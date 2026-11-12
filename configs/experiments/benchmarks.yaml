@@ -1,0 +1,30 @@
+# Optimiser sanity study on benchmark functions.
+# Every method gets the same budget (CEC convention: 10000 * D evaluations,
+# initialisation included) and the same pop_size. Seeds are paired: the
+# same seed gives every method the same initial population.
+
+experiment: benchmarks
+seeds_from: configs/data.yaml     # the 30 pre-declared seeds
+dims: [10, 30]
+functions: [sphere, schwefel_222, rosenbrock, rastrigin, ackley, griewank, schwefel_226]
+# Shifted only. Unshifted functions are not allowed: GWO, POA and SBOA are
+# origin-biased (step 6 finding). One fixed instance per (function, D,
+# transform), drawn from transform_seed, as in CEC.
+transforms:
+  - {shift: true, rotate: false}
+  - {shift: true, rotate: true}
+transform_seed: 2026
+budget_per_dim: 10000
+pop_size: 30
+checkpoints: 50                   # best-so-far stored at this many log-spaced evaluation counts
+harmonic_config: configs/hsboa.yaml
+reference: HSBOA                  # tested against every other method (Wilcoxon + Holm)
+
+methods:
+  - {label: HSBOA, optimizer: hsboa}
+  - {label: SBOA,  optimizer: sboa}
+  - {label: PSO,   optimizer: pso}
+  - {label: DE,    optimizer: de}
+  - {label: GWO,   optimizer: gwo}
+  - {label: POA,   optimizer: poa}
+  - {label: CSA,   optimizer: csa}

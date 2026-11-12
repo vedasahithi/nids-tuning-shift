@@ -1,0 +1,8 @@
+arm,proposals_mean,proposals_min,proposals_max,repeated_settings_mean,repeated_settings_min,repeated_settings_max,distinct_settings_mean,distinct_settings_min,distinct_settings_max,reused_from_earlier_attempt_mean,reused_from_earlier_attempt_min,reused_from_earlier_attempt_max
+hgb_hsboa,400.0,400,400,25.5,22,29,374.5,371,378,54.6,22,172
+hgb_random,373.0,373,373,0.0,0,0,373.0,373,373,42.8,0,226
+hgb_sboa,400.0,400,400,27.8,24,31,372.2,369,376,81.6,25,303
+iw_hsboa,400.0,400,400,25.8,22,29,374.2,371,378,25.8,22,29
+iw_pso,400.0,400,400,0.0,0,0,400.0,400,400,0.0,0,0
+iw_random,373.0,373,373,0.0,0,0,373.0,373,373,0.0,0,0
+iw_sboa,400.0,400,400,27.9,23,32,372.1,368,377,27.9,23,32
