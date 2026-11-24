@@ -1,0 +1,44 @@
+{
+  "arm": "lgbm_plain",
+  "seed": 4,
+  "settings": {
+    "learning_rate": 0.1,
+    "n_estimators": 100,
+    "num_leaves": 31,
+    "min_child_samples": 20,
+    "reg_lambda": 0.0,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "class_weight_power": 0.0
+  },
+  "n_features": 42,
+  "val": {
+    "macro_f1": 0.5449093013323377,
+    "accuracy": 0.8138812056232,
+    "f1_Normal": 0.9166479442821837,
+    "f1_Generic": 0.9851310483870968,
+    "f1_Exploits": 0.7329079307201459,
+    "f1_Fuzzers": 0.695397489539749,
+    "f1_DoS": 0.12938372488934288,
+    "f1_Reconnaissance": 0.7985574446161772,
+    "f1_Analysis": 0.2518796992481203,
+    "f1_Backdoor": 0.19706498951781973,
+    "f1_Shellcode": 0.5862785862785863,
+    "f1_Worms": 0.15584415584415587
+  },
+  "test": {
+    "macro_f1": 0.4388374914269636,
+    "accuracy": 0.7492712432590002,
+    "f1_Normal": 0.8427845543778176,
+    "f1_Generic": 0.9528414001728609,
+    "f1_Exploits": 0.6862198795180722,
+    "f1_Fuzzers": 0.4115877042893386,
+    "f1_DoS": 0.13809880239520958,
+    "f1_Reconnaissance": 0.8209696261682243,
+    "f1_Analysis": 0.04596704249783174,
+    "f1_Backdoor": 0.03940886699507389,
+    "f1_Shellcode": 0.3418013856812933,
+    "f1_Worms": 0.10869565217391304
+  },
+  "wall_s": 19.450966299977154
+}

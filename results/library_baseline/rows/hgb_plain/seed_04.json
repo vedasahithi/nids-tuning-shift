@@ -1,0 +1,42 @@
+{
+  "arm": "hgb_plain",
+  "seed": 4,
+  "settings": {
+    "learning_rate": 0.1,
+    "max_iter": 200,
+    "max_leaf_nodes": 31,
+    "min_samples_leaf": 20,
+    "l2_regularization": 0.0,
+    "class_weight_power": 0.0
+  },
+  "n_features": 42,
+  "val": {
+    "macro_f1": 0.47563302706051347,
+    "accuracy": 0.7798625566739855,
+    "f1_Normal": 0.8979646852675561,
+    "f1_Generic": 0.9756128064032016,
+    "f1_Exploits": 0.6860800803313669,
+    "f1_Fuzzers": 0.6283087210922262,
+    "f1_DoS": 0.1342406433652954,
+    "f1_Reconnaissance": 0.7439938000516662,
+    "f1_Analysis": 0.1347517730496454,
+    "f1_Backdoor": 0.1015625,
+    "f1_Shellcode": 0.4538152610441767,
+    "f1_Worms": 0.0
+  },
+  "test": {
+    "macro_f1": 0.3984342436189966,
+    "accuracy": 0.7212748384589224,
+    "f1_Normal": 0.8215486176301366,
+    "f1_Generic": 0.9466295145214876,
+    "f1_Exploits": 0.6334143424757938,
+    "f1_Fuzzers": 0.36557626919920266,
+    "f1_DoS": 0.11858407079646018,
+    "f1_Reconnaissance": 0.7274453941120607,
+    "f1_Analysis": 0.026022304832713755,
+    "f1_Backdoor": 0.022872827081427266,
+    "f1_Shellcode": 0.3013066871637202,
+    "f1_Worms": 0.020942408376963352
+  },
+  "wall_s": 76.41663589997916
+}

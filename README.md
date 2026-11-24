@@ -42,6 +42,14 @@ python tools/check_manifest.py          # every result file listed in manifest.c
 `MANIFEST.md` maps each table, figure and analysis of the paper to its command, configuration, seeds and
 result files.
 
+`results/package/` holds the data checksums, the group keys of identical records, the split indices of every seed,
+the preprocessing settings and the metrics of every stored run (see its README). To rebuild them and compare with the
+stored copies:
+
+```bash
+python scripts/export_package.py --verify
+```
+
 ## 4. Re-run the experiments
 
 Runs are seeded, checkpointed and can be stopped and restarted. Add `--smoke` to any experiment for a quick

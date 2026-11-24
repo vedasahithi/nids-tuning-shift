@@ -8,12 +8,14 @@ Writes paper/tables/<id>.md and <id>.csv for:
     T2_detectors  Table 2  detectors on the official split (T2_detectors_full.csv also has the test accuracy)
     T3_contrasts  Table 3  paired contrasts H1-H10 on test macro-F1 (from results/stats_report)
     T4_split      Table 4  decomposition of the gain of a random split
+    T5_perclass   Table 5  test support and F1 by class (from results/per_class_eval)
     S1_shift      Table S1 shift between the partitions, label conflicts, bounds, label agreement
 """
 
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -35,6 +37,11 @@ LABEL = {"lgbm_default": "LightGBM default", "logreg": "Logistic reg.", "rf": "R
          "qrnn_untuned": "QRNN plain", "qrnn_hsboa": "QRNN+HSBOA†", "qrnn_random": "QRNN+RS",
          "qrnn_random_d20": "QRNN+RS d20"}
 MINUS = "−"
+
+
+def red(text: str) -> str:
+    """Revision marker: [[...]] is shown in red by the manuscript builder (set REVISION_MARK=1)."""
+    return f"[[{text}]]" if os.environ.get("REVISION_MARK") else text
 
 
 def ms(x, d=3, sep=" ± ") -> str:
@@ -115,9 +122,10 @@ def t_detectors() -> None:
     lr = df[df.model == "lgbm"].test.mean()
     save("T2_detectors", t.drop(columns="Test acc."),
          "Table 2. Detectors on the official split (10 classes; mean of 10 seeds, test ± sd). RS = random search; "
-         "Evals = distinct trainings per run (0 = no search); Min = minutes per run on one CPU thread; HP = "
-         "hyper-parameters only. The two default rows are untuned library defaults; the LightGBM default is the "
-         f"model of Table 4 and Fig. 1 (tuned {lr:.3f}, default {lg:.3f}). † In QRNN+HSBOA the harmonic term "
+         "Evals = distinct trainings per run (0 = no search; submissions are in Table 1); Min = minutes per run on one CPU thread; HP = "
+         "hyper-parameters only. The two default rows are not searched: HGB default (20 features, α = 0.5) follows a validation-only "
+         + red("18-cell pilot on three seeds; ") + "LightGBM default uses library settings with the same features and "
+         f"α and is the model of Table 4 and Fig. 1 (tuned {lr:.3f}, default {lg:.3f}). † In QRNN+HSBOA the harmonic term "
          "never starts (three iterations).")
 
 
@@ -136,9 +144,12 @@ def t_contrasts() -> None:
         return f"{signed(d)} ({signed(lo)},{nb}{signed(hi)})"
 
     h1 = c[c.hypothesis == "H1"]
-    rows = [("H1 HSBOA " + MINUS + " neural",
-             f"{signed(h1.mean_diff.min())} to{nb}{signed(h1.mean_diff.max())} ({h1.ci95_low.min():.3f},{nb}"
-             f"{h1.ci95_high.max():.3f})", p(h1.p_holm_h1_h4_by_metric_8.max()))]
+    names = {"qrnn_hsboa": "QRNN+HSBOA", "qrnn_random": "QRNN+RS", "qrnn_random_d20": "QRNN+RS d20",
+             "cnn_bilstm": "CNN-BiLSTM", "mlp": "MLP"}
+    rows = []
+    for r in h1.sort_values("mean_diff", ascending=False).itertuples():
+        rows.append((f"H1 HSBOA {MINUS} {names[r.Index]}", cell(r.mean_diff, r.ci95_low, r.ci95_high),
+                     p(r.p_holm_h1_h4_by_metric_8)))
     for h, b, lab in (("H2", "hgb_random", "RS"), ("H3", "hgb_sboa", "SBOA"), ("H4", "hgb_default", "default")):
         r = c.loc[b]
         rows.append((f"{h} HSBOA {MINUS} {lab}", cell(r.mean_diff, r.ci95_low, r.ci95_high),
@@ -152,34 +163,34 @@ def t_contrasts() -> None:
     save("T3_contrasts", pd.DataFrame(rows, columns=["Contrast", "Difference (95% CI)", "p (Holm)"]),
          "Table 3. Paired contrasts on test macro-F1 (mean difference over 10 seeds, 95% bootstrap interval, "
          "Holm-adjusted two-sided Wilcoxon p within H1-H4 (8 comparisons) and H5-H10 (6)); only H1 is supported. "
-         "HSBOA = HGB tuned by HSBOA (H1 pools five neural models); shift = LightGBM tuned by HSBOA with the "
+         "HSBOA = HGB tuned by HSBOA (H1 is " + red("five separate contrasts with the tuned neural models") + "); shift = LightGBM tuned by HSBOA with the "
          "shift-aware fitness (standard = standard fitness; w.t. = weighted training); RS = random search.")
 
 
 def t_search() -> None:
     """Search spaces and budgets, transcribed from configs/experiments/*.yaml and configs/model.yaml."""
     lgbm = ("rate 10^[-2.5,-0.5]; trees 100-400; leaves 15-127; min child 5-100; L2 10^[-6,1]; "
-            "rows 0.5-1; columns 0.3-1; α 0-1")
+            "rows 0.5-1; columns 0.3-1")
     rows = [
         ("LightGBM + mask", "mask; " + lgbm, "400; RS 373"),
         ("HGB + mask", "mask; rate 10^[-2.5,-0.5]; iterations 100-400; leaves 15-127; min leaf 5-100; "
-                       "L2 10^[-6,0]; α 0-1", "400; RS 373"),
+                       "L2 10^[-6,0]", "400; RS 373"),
         ("HGB, ablation", "no mask (top 20 features); rate 10^[-2.5,-0.5]; iterations 100-400; leaves 15-127; "
-                          "min leaf 5-100; L2 10^[-6,0]; α 0-1; default settings as first candidate", "60 (pop. 10)"),
-        ("MLP", "layers 1-3; units 2^[4,8]; dropout 0-0.5; rate 10^[-4,-2]; L2 10^[-7,-3]; batch 2^[6,9]; α 0-1",
+                          "min leaf 5-100; L2 10^[-6,0]; default settings as first candidate", "60 (pop. 10)"),
+        ("MLP", "layers 1-3; units 2^[4,8]; dropout 0-0.5; rate 10^[-4,-2]; L2 10^[-7,-3]; batch 2^[6,9]",
          "39"),
         ("CNN-BiLSTM", "filters 2^[4,7]; kernel 2-5; LSTM units 2^[4,7]; dropout 0-0.5; rate 10^[-4,-2]; "
-                       "batch 2^[6,9]; α 0-1", "39"),
-        ("QRNN", "rate 10^[-4,-1.5]; units 2^[3,6]; window 1-4; dropout 0-0.5; L2 10^[-7,-3]; batch 2^[6,9]; "
-                 "α 0-1", "39"),
+                       "batch 2^[6,9]", "39"),
+        ("QRNN", "rate 10^[-4,-1.5]; units 2^[3,6]; window 1-4; dropout 0-0.5; L2 10^[-7,-3]; batch 2^[6,9]"
+                 , "48; RS 39"),
         ("XGBoost", "rate 10^[-2.5,-0.5]; trees 100-400; depth 3-12; min weight 10^[-1,1.5]; L2 10^[-6,1]; "
-                    "rows 0.5-1; columns 0.3-1; α 0-1", "32"),
-        ("Random forest", "trees 100-400; depth 6-40; min leaf 1-10; features 0.1-1; α 0-1", "32"),
+                    "rows 0.5-1; columns 0.3-1", "32"),
+        ("Random forest", "trees 100-400; depth 6-40; min leaf 1-10; features 0.1-1", "32"),
         ("Logistic reg.", "C 10^[-3,3] (7 values); α 0, 0.5, 1", "21"),
     ]
-    save("T1_search", pd.DataFrame(rows, columns=["Model", "Search ranges", "Evals"]),
-         "Table 1. Search ranges and distinct trainings per run (RS = random search; PSO 400). 10^[a,b] and "
-         "2^[a,b] are uniform in the exponent; integers are rounded; α = class-weight power. mask = 42 "
+    save("T1_search", pd.DataFrame(rows, columns=["Model", "Search ranges", red("Submitted")]),
+         "Table 1. Search ranges and " + red("submitted candidates") + " per run (RS = random search; PSO 400; " + red("distinct trainings, 372-375 for the 400-submission arms, are in Table 2 and Section 4.3") + "). 10^[a,b] and "
+         "2^[a,b] are uniform in the exponent; integers are rounded; every model also searches the class-weight power α in [0, 1]. mask = 42 "
          "coordinates in [0, 1], on if above 0.5, the most informative columns added until three are on. "
          "Without the mask, LightGBM, XGBoost, random forest and HGB use random search (32 trainings). Neural "
          "models: early stopping on validation loss (patience 5, final 10), at most 100 epochs per trial, "
@@ -236,9 +247,30 @@ def t_split() -> None:
          "4% smaller in every class). Twin = share of test records with an identical training record.")
 
 
+def t_perclass() -> None:
+    """Support and per-class F1 on the official test partition (results/per_class_eval)."""
+    d = pd.read_csv(R / "per_class_eval" / "per_class.csv")
+    arms = [("lgbm_default", "LightGBM default"), ("hgb_hsboa", "HGB+HSBOA"), ("mlp", "MLP")]
+    classes = list(d[d.arm == "lgbm_default"]["class"])
+    rows = []
+    for c in classes:
+        sup = int(d[(d.arm == "lgbm_default") & (d["class"] == c)].support.iloc[0])
+        row = {"Class": "Recon." if c == "Reconnaissance" else c, "n": str(sup)}
+        for a, lab in arms:
+            r = d[(d.arm == a) & (d["class"] == c)].iloc[0]
+            half = max(r.f1_seed_hi - r.f1_seed_lo, r.f1_grouped_hi - r.f1_grouped_lo) / 2
+            row[lab] = f"{r.f1:.3f} ±{half:.3f}" if a == "lgbm_default" else f"{r.f1:.3f}"
+        rows.append(row)
+    save("T5_perclass", pd.DataFrame(rows),
+         "Table 5. Test support (n) and F1 by class on the official partition (mean of 10 seeds). ± = half-width "
+         "of the wider 95% interval (bootstrap over seeds or over groups of identical test records, 2,000 "
+         "resamples) for LightGBM default; the intervals of all arms are in the repository. Final models refitted "
+         "from the stored settings; CNN-BiLSTM omitted (refit not exact). Recon. = Reconnaissance.")
+
+
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for f in OUT.glob("*.*"):
         f.unlink()
-    for fn in (t_search, t_detectors, t_contrasts, t_shift, t_split):
+    for fn in (t_search, t_detectors, t_contrasts, t_shift, t_split, t_perclass):
         fn()
